@@ -1,8 +1,8 @@
 <script>
     import { base } from "$app/paths";
-    import Table from "../components/Table.svelte";
+    import Table from "$components/Table.svelte";
     import CalcTypeSelect from "$components/CalcTypeSelect.svelte";
-    import Settings from "../components/Settings/Settings.svelte";
+    import Settings from "$components/Settings/Settings.svelte";
     import Tesseract from "tesseract.js";
     let calcType;
     let canvas;
