@@ -1,16 +1,10 @@
 <script>
-    import { calcTypes } from "./store.js";
+    import { calcTypes } from "$lib/store.js";
     export let selected;
 </script>
 
-<select bind:value={selected}>
+<select class="bg-gray-800" bind:value={selected}>
     {#each $calcTypes as calcType}
         <option value={calcType}>{calcType.label}</option>
     {/each}
 </select>
-
-<style>
-    select {
-        background: #1f2937;
-    }
-</style>

@@ -1,5 +1,5 @@
 <script>
-    import { calcTypes } from "../store.js";
+    import { calcTypes } from "$lib/store.js";
     import Item from "./Item.svelte";
     export let label;
     export let rates;
@@ -22,7 +22,7 @@
     );
 </script>
 
-<div class="table">
+<div class="m-2 rounded-2xl bg-gray-800 p-2">
     <div class="head">
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <div
@@ -77,12 +77,6 @@
 </div>
 
 <style>
-    .table {
-        margin: 10px;
-        border-radius: 15px;
-        background: #1f2937;
-        padding: 10px;
-    }
     .label {
         width: 194px;
     }

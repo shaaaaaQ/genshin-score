@@ -1,8 +1,8 @@
 <script>
     import { base } from "$app/paths";
-    import Table from "./Table.svelte";
-    import CalcTypeSelect from "./CalcTypeSelect.svelte";
-    import Settings from "./Settings/index.svelte";
+    import Table from "../components/Table.svelte";
+    import CalcTypeSelect from "$components/CalcTypeSelect.svelte";
+    import Settings from "../components/Settings/Settings.svelte";
     import Tesseract from "tesseract.js";
     let calcType;
     let canvas;
@@ -93,3 +93,22 @@
     href="https://github.com/naptha/tesseract.js/blob/master/LICENSE.md"
     target="_blank">LICENSE</a
 >)
+
+<style lang="postcss">
+    :global(*) {
+        color: theme(colors.gray.100);
+    }
+    :global(html) {
+        background: theme(colors.gray.900);
+    }
+    :global(a) {
+        color: theme(colors.sky.500);
+    }
+    :global(body) {
+        max-width: 50rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        padding: 10px;
+    }
+</style>
