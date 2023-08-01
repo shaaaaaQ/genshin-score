@@ -22,11 +22,11 @@
     );
 </script>
 
-<div class="m-2 rounded-2xl bg-gray-800 p-2">
-    <div class="head">
+<div class="m-2 rounded-2xl bg-gray-800 p-2 h-max">
+    <div class="p-1 flex">
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <div
-            class="label"
+            class="p-[2px] w-[190px]"
             on:input={(e) => {
                 const value = e.target.textContent;
                 calcTypes.updateLabel(index, value);
@@ -39,35 +39,32 @@
             {label}
         </div>
         <button
-            class="delete-button material-icons"
+            class="material-icons ml-auto"
             on:click={() => calcTypes.rm(index)}
         >
             delete
         </button>
     </div>
-    <div class="item-container">
-        {#each Object.entries(rates) as [propId, rate]}
-            <Item
-                on:input={(e) => {
-                    const value = parseFloat(e.target.value);
-                    if (!isNaN(value))
-                        calcTypes.updateProp(index, propId, value);
-                }}
-                on:click={() => calcTypes.rm(index, propId)}
-                value={rate}
-                {propId}
-            />
-        {/each}
-    </div>
-    <div class="foot">
-        <select class="prop-select" bind:value={selected}>
+    {#each Object.entries(rates) as [propId, rate]}
+        <Item
+            on:input={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value)) calcTypes.updateProp(index, propId, value);
+            }}
+            on:click={() => calcTypes.rm(index, propId)}
+            value={rate}
+            {propId}
+        />
+    {/each}
+    <div class="py-1 pr-1 flex">
+        <select class="bg-gray-700 rounded-lg" bind:value={selected}>
             <option hidden />
             {#each selectable as propId}
                 <option value={propId}>{props[propId]}</option>
             {/each}
         </select>
         <button
-            class="push-button material-icons"
+            class="material-icons ml-auto"
             on:click={() =>
                 selected && calcTypes.updateProp(index, selected, 1)}
         >
@@ -75,35 +72,3 @@
         </button>
     </div>
 </div>
-
-<style>
-    .label {
-        width: 194px;
-    }
-    .head {
-        padding: 5px;
-        display: flex;
-    }
-    .foot {
-        padding: 5px 5px 5px 0;
-        display: flex;
-    }
-    .prop-select:focus-visible {
-        outline: none;
-    }
-    .delete-button,
-    .push-button {
-        margin-left: 4px;
-        width: 26px;
-        text-align: center;
-        background: #1f2937;
-        border: none;
-        padding: 0;
-    }
-    .prop-select {
-        background: #374151;
-        border: none;
-        border-radius: 8px;
-        width: 199px;
-    }
-</style>

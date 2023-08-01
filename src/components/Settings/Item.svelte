@@ -15,46 +15,14 @@
     };
 </script>
 
-<div class="item">
-    <div class="prop-name">{props[propId]}</div>
+<div class="bg-gray-700 my-1 p-1 rounded-lg flex">
+    <div class="w-[150px] p-[2px]">{props[propId]}</div>
     <input
-        class="rate"
+        class="bg-gray-600 w-[40px] rounded-[5px] text-end p-[2px]"
         on:input
         on:keydown={(e) => e.key === "Enter" && e.preventDefault()}
         {value}
         contenteditable
     />
-    <button class="remove-button material-icons" on:click>remove</button>
+    <button class="material-icons ml-1" on:click>remove</button>
 </div>
-
-<style>
-    .item {
-        background: #374151;
-        margin: 5px 0;
-        padding: 5px;
-        border-radius: 8px;
-        display: flex;
-    }
-    .prop-name {
-        width: 150px;
-    }
-    .rate {
-        background: #4b5563;
-        width: 40px;
-        border: none;
-        border-radius: 5px;
-        text-align: end;
-        padding: 2px;
-    }
-    .rate:focus-visible {
-        outline: none;
-    }
-    .remove-button {
-        margin-left: 4px;
-        width: 26px;
-        text-align: center;
-        background: #374151;
-        border: none;
-        padding: 0;
-    }
-</style>
