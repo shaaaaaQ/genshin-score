@@ -1,12 +1,12 @@
 <script>
     import { base } from "$app/paths";
-    import Table from "$components/Table.svelte";
     import CalcTypeSelect from "$components/CalcTypeSelect.svelte";
     import Settings from "$components/Settings/Settings.svelte";
-    import Tesseract from "tesseract.js";
+    import OCR from "$components/OCR.svelte";
     let calcType;
     let canvas;
-    let stats = [];
+    let base64;
+    let stats;
     function handlePaste(e) {
         e.preventDefault();
 
@@ -23,7 +23,7 @@
         reader.readAsDataURL(file.getAsFile());
         reader.addEventListener("load", async (e) => {
             const image = new Image();
-            const base64 = e.target.result;
+            base64 = e.target.result;
 
             image.src = base64;
             image.addEventListener("load", () => {
@@ -31,38 +31,6 @@
                 canvas.height = image.height;
                 canvas.getContext("2d").drawImage(image, 0, 0);
             });
-
-            const {
-                data: { text },
-            } = await Tesseract.recognize(base64, "jpn");
-
-            console.log(text);
-
-            stats = [];
-
-            text.replace(/ /g, "")
-                .split("\n")
-                .filter((str) => str.startsWith("・"))
-                .forEach((str) => {
-                    str = str
-                        .slice(1)
-                        .replace(/⓪/g, "0")
-                        .replace(/①/g, "1")
-                        .replace(/②/g, "2")
-                        .replace(/③/g, "3")
-                        .replace(/④/g, "4")
-                        .replace(/⑤/g, "5")
-                        .replace(/⑥/g, "6")
-                        .replace(/⑦/g, "7")
-                        .replace(/⑧/g, "8")
-                        .replace(/⑨/g, "9")
-                        .replace(/カ/g, "力")
-                        .replace(/%6/g, "%");
-                    if (/\.[0-9]9%/.test(str)) {
-                        str = `${str.slice(0, -2)}%`;
-                    }
-                    stats.push(str);
-                });
         });
     }
 </script>
@@ -72,7 +40,9 @@
 
 <CalcTypeSelect bind:selected={calcType} />
 
-<Table {stats} {calcType} />
+{#if base64}
+    <OCR bind:stats {base64} {calcType} />
+{/if}
 
 <details>
     <summary>設定</summary>

@@ -50,11 +50,9 @@
             </td>
         </tr>
     {/each}
-    <tfoot>
-        <tr>
-            <th>
-                スコア: {score}
-            </th>
-        </tr>
-    </tfoot>
+    <tr>
+        <th class="text-left underline">
+            スコア: {score}
+        </th>
+    </tr>
 </table>
