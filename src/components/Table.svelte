@@ -42,7 +42,7 @@
     })();
 </script>
 
-<table>
+<table class="bg-gray-700 rounded-md">
     {#each stats as stat}
         <tr>
             <td>
