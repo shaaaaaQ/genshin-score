@@ -1,8 +1,7 @@
 <script>
     import Tesseract from "tesseract.js";
-    import Table from "$components/Table.svelte";
-    export let base64;
-    export let calcType;
+    import Result from "$components/Result.svelte";
+    export let file;
     let status;
     let progress = 0;
     $: proc = (async () => {
@@ -17,7 +16,7 @@
         await worker.initialize("jpn");
         const {
             data: { text },
-        } = await worker.recognize(base64);
+        } = await worker.recognize(file);
 
         console.log(text);
 
@@ -57,5 +56,5 @@
         <progress value={progress} />
     </div>
 {:then stats}
-    <Table {stats} {calcType} />
+    <Result {stats} />
 {/await}

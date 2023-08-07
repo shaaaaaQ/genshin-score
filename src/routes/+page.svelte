@@ -1,47 +1,28 @@
 <script>
     import { base } from "$app/paths";
-    import CalcTypeSelect from "$components/CalcTypeSelect.svelte";
     import Settings from "$components/Settings/Settings.svelte";
     import OCR from "$components/OCR.svelte";
-    let calcType;
-    let canvas;
-    let base64;
+    let file;
     let stats;
-    function handlePaste(e) {
-        e.preventDefault();
-
-        let file;
-        if (e.clipboardData.types[0] === "Files") {
-            file = e.clipboardData.items[0];
-        } else if (e.clipboardData.types[1] === "Files") {
-            file = e.clipboardData.items[1];
-        } else {
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.readAsDataURL(file.getAsFile());
-        reader.addEventListener("load", async (e) => {
-            const image = new Image();
-            base64 = e.target.result;
-
-            image.src = base64;
-            image.addEventListener("load", () => {
-                canvas.width = image.width;
-                canvas.height = image.height;
-                canvas.getContext("2d").drawImage(image, 0, 0);
-            });
-        });
-    }
 </script>
 
-<div on:paste={handlePaste} contenteditable>ここに貼り付け</div>
-<canvas bind:this={canvas} width="0" height="0" />
+<div
+    class="border-gray-500 border-dashed border-4 focus:border-gray-400 focus-visible:outline-none rounded-md w-fit p-2"
+    on:paste|preventDefault={(e) => {
+        if (e.clipboardData.types[0] === "Files") {
+            file = e.clipboardData.items[0].getAsFile();
+        } else if (e.clipboardData.types[1] === "Files") {
+            file = e.clipboardData.items[1].getAsFile();
+        }
+    }}
+    contenteditable
+>
+    ここに貼り付け
+</div>
 
-<CalcTypeSelect bind:selected={calcType} />
-
-{#if base64}
-    <OCR bind:stats {base64} {calcType} />
+{#if file}
+    <img class="p-2 mx-auto" src={URL.createObjectURL(file)} alt="" />
+    <OCR bind:stats {file} />
 {/if}
 
 <details>

@@ -1,6 +1,7 @@
 <script>
+    import CalcTypeSelect from "$components/CalcTypeSelect.svelte";
     export let stats;
-    export let calcType;
+    let calcType;
     const props = {
         FIGHT_PROP_CRITICAL: "会心率",
         FIGHT_PROP_CRITICAL_HURT: "会心ダメージ",
@@ -14,6 +15,7 @@
         FIGHT_PROP_ELEMENT_MASTERY: "元素熟知",
     };
     $: score = (() => {
+        if (!calcType) return 0;
         let score = 0;
         stats.forEach((stat) => {
             const value = parseFloat(stat.split("+")[1]);
@@ -42,17 +44,17 @@
     })();
 </script>
 
-<table class="bg-gray-700 rounded-md">
-    {#each stats as stat}
-        <tr>
-            <td>
+<div>
+    <CalcTypeSelect bind:selected={calcType} />
+
+    <div class="bg-gray-700 rounded-md w-fit p-2">
+        {#each stats as stat}
+            <div>
                 {stat}
-            </td>
-        </tr>
-    {/each}
-    <tr>
-        <th class="text-left underline">
+            </div>
+        {/each}
+        <div class="text-left mt-2 font-bold underline">
             スコア: {score}
-        </th>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>
