@@ -1,10 +1,16 @@
 <script>
     import { base } from "$app/paths";
-    import Settings from "$components/Settings/Settings.svelte";
+    import Settings from "$components/Settings.svelte";
     import OCR from "$components/OCR.svelte";
+    import CropModal from "$components/CropModal.svelte";
     let file;
     let stats;
+    let showCropModal;
 </script>
+
+<CropModal bind:show={showCropModal} />
+
+<button on:click={() => (showCropModal = true)}>show</button>
 
 <div
     class="border-gray-500 border-dashed border-4 focus:border-gray-400 focus-visible:outline-none rounded-md w-fit p-2"

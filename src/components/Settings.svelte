@@ -1,6 +1,6 @@
 <script>
-    import Form from "./Form.svelte";
-    import Table from "./Table.svelte";
+    import Form from "./Settings/Form.svelte";
+    import Table from "./Settings/Table.svelte";
     import { calcTypes } from "$lib/store.js";
 </script>
 
