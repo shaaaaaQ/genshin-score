@@ -22,6 +22,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"svelte-easy-crop": "^2.0.1",
 		"tesseract.js": "^4.1.1"
 	}
 }

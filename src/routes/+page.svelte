@@ -4,26 +4,45 @@
     import OCR from "$components/OCR.svelte";
     import CropModal from "$components/CropModal.svelte";
     let file;
+    let originalFile;
     let stats;
     let showCropModal;
 </script>
 
-<CropModal bind:show={showCropModal} />
+{#if showCropModal}
+    <CropModal
+        on:crop={(e) => (file = e.detail.blob)}
+        closeModal={() => (showCropModal = false)}
+        {originalFile}
+    />
+{/if}
 
-<button on:click={() => (showCropModal = true)}>show</button>
-
-<div
-    class="border-gray-500 border-dashed border-4 focus:border-gray-400 focus-visible:outline-none rounded-md w-fit p-2"
-    on:paste|preventDefault={(e) => {
-        if (e.clipboardData.types[0] === "Files") {
-            file = e.clipboardData.items[0].getAsFile();
-        } else if (e.clipboardData.types[1] === "Files") {
-            file = e.clipboardData.items[1].getAsFile();
-        }
-    }}
-    contenteditable
->
-    ここに貼り付け
+<div class="flex justify-center gap-3 m-3">
+    <div
+        class="border-gray-500 border-dashed border-4 focus:border-gray-400 focus-visible:outline-none rounded-md w-fit p-2"
+        on:paste|preventDefault={(e) => {
+            if (e.clipboardData.types[0] === "Files") {
+                file = e.clipboardData.items[0].getAsFile();
+            } else if (e.clipboardData.types[1] === "Files") {
+                file = e.clipboardData.items[1].getAsFile();
+            }
+        }}
+        contenteditable
+    >
+        ここに貼り付け
+    </div>
+    <label class="bg-gray-700 rounded-md p-2">
+        <input
+            type="file"
+            class="hidden"
+            accept="image/*"
+            on:change={(e) => {
+                originalFile = e.target.files[0];
+                showCropModal = true;
+            }}
+            on:click={(e) => (e.target.value = "")}
+        />ファイルを選択
+    </label>
 </div>
 
 {#if file}

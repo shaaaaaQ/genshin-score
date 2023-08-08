@@ -50,11 +50,13 @@
     })();
 </script>
 
-{#await proc}
-    <div>
-        {status}
-        <progress value={progress} />
-    </div>
-{:then stats}
-    <Result {stats} />
-{/await}
+<div class="w-fit mx-auto">
+    {#await proc}
+        <div>
+            {status}
+            <progress value={progress} />
+        </div>
+    {:then stats}
+        <Result {stats} />
+    {/await}
+</div>

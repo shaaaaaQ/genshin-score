@@ -45,9 +45,10 @@
 </script>
 
 <div>
-    <CalcTypeSelect bind:selected={calcType} />
-
-    <div class="bg-gray-700 rounded-md w-fit p-2">
+    <div class="bg-gray-700 rounded-md w-fit p-4">
+        <div class="my-1">
+            <CalcTypeSelect bind:selected={calcType} />
+        </div>
         {#each stats as stat}
             <div>
                 {stat}
