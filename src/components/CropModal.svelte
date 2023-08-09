@@ -20,8 +20,16 @@
                 on:cropcomplete={(e) => (area = e.detail.pixels)}
             />
         </div>
-        <div class="flex">
+        <div class="flex justify-end gap-2">
             <button
+                class="bg-gray-700 p-2 rounded-md"
+                on:click={() => {
+                    dispatch("crop", { blob: originalFile });
+                    closeModal();
+                }}>元の画像を選択</button
+            >
+            <button
+                class="bg-gray-700 p-2 rounded-md"
                 on:click={() => {
                     const image = new Image();
                     image.src = URL.createObjectURL(originalFile);
@@ -29,7 +37,6 @@
                         const canvas = document.createElement("canvas");
                         canvas.width = area.width;
                         canvas.height = area.height;
-                        console.log(area);
                         canvas
                             .getContext("2d")
                             .drawImage(

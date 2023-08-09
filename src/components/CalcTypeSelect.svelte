@@ -3,7 +3,7 @@
     export let selected;
 </script>
 
-<select class="bg-gray-800" bind:value={selected}>
+<select class="bg-gray-700" bind:value={selected}>
     {#each $calcTypes as calcType}
         <option value={calcType}>{calcType.label}</option>
     {/each}

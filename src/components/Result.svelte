@@ -45,7 +45,7 @@
 </script>
 
 <div>
-    <div class="bg-gray-700 rounded-md w-fit p-4">
+    <div class="bg-gray-800 rounded-md w-fit p-4">
         <div class="my-1">
             <CalcTypeSelect bind:selected={calcType} />
         </div>
