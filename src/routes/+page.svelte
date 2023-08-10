@@ -17,7 +17,7 @@
     />
 {/if}
 
-<div class="flex justify-center gap-3 m-3">
+<div class="flex justify-center gap-3 m-3 items-center">
     <div
         class="border-gray-500 border-dashed border-4 focus:border-gray-400 focus-visible:outline-none rounded-md w-fit p-2"
         on:paste|preventDefault={(e) => {
@@ -31,7 +31,7 @@
     >
         ここに貼り付け
     </div>
-    <label class="bg-gray-700 rounded-md p-2">
+    <label class="bg-gray-700 rounded-md p-2 h-max">
         <input
             type="file"
             class="hidden"
@@ -56,19 +56,23 @@
 </details>
 
 <details>
-    <summary>使い方</summary>
+    <summary>使い方とか</summary>
     <a href="{base}/images/kore.png" target="_blank">これ</a>をWindowsなら<code
         >Win+Shift+S</code
     >とかで<a href="{base}/images/konnna.png" target="_blank">こんな</a
-    >感じに切り取って上のやつに貼り付ける
+    >感じに切り取って上のやつに貼り付けるか、<br />
+    スクリーンショットを選択して<a
+        href="{base}/images/konnna.png"
+        target="_blank">こんな</a
+    >感じに切り取って選択する<br />
+    防御基準とかの計算をしたいときは上の設定をがんばっていじって<br />
+    <a href="https://github.com/naptha/tesseract.js" target="_blank"
+        >Tesseract.js</a
+    ><br />
+    <a href="https://github.com/ValentinH/svelte-easy-crop" target="_blank"
+        >svelte-easy-crop</a
+    >
 </details>
-
-<a href="https://github.com/naptha/tesseract.js" target="_blank">tesseract.js</a
->
-(<a
-    href="https://github.com/naptha/tesseract.js/blob/master/LICENSE.md"
-    target="_blank">LICENSE</a
->)
 
 <style lang="postcss">
     :global(*) {
