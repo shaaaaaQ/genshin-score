@@ -17,6 +17,7 @@
         const {
             data: { text },
         } = await worker.recognize(file);
+        await worker.terminate();
 
         console.log(text);
 
